@@ -1,9 +1,10 @@
 import React from "react";
+import Scatter from "./components/Scatter";
 
 function App() {
   return (
     <div>
-      <h1>Manufac Assignment</h1>
+      <Scatter />
     </div>
   );
 }
