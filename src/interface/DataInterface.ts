@@ -18,15 +18,22 @@ export interface ChartData {
 }
 
 export interface BarData {
+  title: {
+    text: string;
+  };
+  tooltip: {};
   xAxis: {
+    name: string;
     type: string;
-    data: string[];
+    data: number[];
   };
   yAxis: {
+    name: string;
     type: string;
   };
   series: [
     {
+      name: string;
       data: number[];
       type: string;
       showBackground: boolean;

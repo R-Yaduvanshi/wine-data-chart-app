@@ -1,39 +1,21 @@
 import React, { useState, useEffect } from "react";
 import ReactEcharts from "echarts-for-react";
 import WineData from "../config/Wine-Data.json";
-
-interface BarData {
-  xAxis: {
-    name: string;
-    type: string;
-    data: number[];
-  };
-  yAxis: {
-    name: string;
-    type: string;
-  };
-  series: [
-    {
-      name: string;
-      data: number[];
-      type: string;
-      showBackground: boolean;
-      backgroundStyle: {
-        color: "rgba(220, 220, 220, 0.8)";
-      };
-    }
-  ];
-}
+import { BarData } from "../interface/DataInterface";
 
 const BarChart: React.FC = () => {
   const [data, setData] = useState<BarData>({
+    title: {
+      text: "Bar Chart",
+    },
+    tooltip: {},
     xAxis: {
-      name: "Alcohal",
+      name: "",
       type: "category",
       data: [],
     },
     yAxis: {
-      name: "Color Intencity",
+      name: "",
       type: "value",
     },
     series: [
@@ -58,18 +40,22 @@ const BarChart: React.FC = () => {
     }
 
     setData({
+      title: {
+        text: "Bar Chart",
+      },
+      tooltip: {},
       xAxis: {
         name: "Alcohal",
         type: "category",
         data: alcohol,
       },
       yAxis: {
-        name: "average",
+        name: "Average Malic Acid",
         type: "value",
       },
       series: [
         {
-          name: "Color Intensity",
+          name: "Average Malic Acid",
           data: malicAcid,
 
           type: "bar",
