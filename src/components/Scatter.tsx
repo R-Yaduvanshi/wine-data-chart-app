@@ -2,13 +2,17 @@ import React, { useState, useEffect } from "react";
 import ReactEcharts from "echarts-for-react";
 import WineData from "../config/Wine-Data.json";
 import { ChartData } from "../interface/DataInterface";
-
+// import style from "../c";
+import Navbar from "../config/Navbar";
 const Scatter: React.FC = () => {
   const [data, setData] = useState<ChartData>({
+    title: {
+      text: "ECharts Getting Started Example",
+    },
     xAxis: {
       name: "Color Intensity",
       type: "value",
-      data: [1, 2, 3, 4, 5, 6],
+      data: [],
     },
     yAxis: {
       name: "Hue",
@@ -17,23 +21,26 @@ const Scatter: React.FC = () => {
     series: [
       {
         type: "scatter",
-        data: [1, 2, 3, 4, 5, 6, 8],
+        data: [],
       },
     ],
   });
 
+  //   Data received from Wine-Data.json
   useEffect(() => {
     const colorInte: number[] = [];
     const hue: number[] = [];
     for (const dataObj of WineData) {
-      //   console.log("MyOBJ=>", dataObj["Color intensity"]);
-      if (colorInte.length < 30) {
+      if (colorInte.length < 100) {
         colorInte.push(Number(dataObj["Color intensity"]));
         hue.push(Number(dataObj.Hue));
       }
     }
 
     setData({
+      title: {
+        text: "Scatter Plot chart",
+      },
       xAxis: {
         name: "Color Intensity",
         type: "value",
@@ -52,7 +59,13 @@ const Scatter: React.FC = () => {
     });
   }, []);
 
-  return <ReactEcharts option={data} />;
+  return (
+    <>
+      <div>
+        <ReactEcharts option={data} />
+      </div>
+    </>
+  );
 };
 
 export default Scatter;
