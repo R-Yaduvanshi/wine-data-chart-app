@@ -2,10 +2,11 @@ export interface ChartData {
   title: {
     text: string;
   };
+  tooltip: {};
   xAxis: {
     name: string;
     type: string;
-    data?: number[];
+    // data?: number[];
   };
   yAxis: {
     name: string;
@@ -13,7 +14,7 @@ export interface ChartData {
   };
   series: {
     type: string;
-    data: number[];
+    data: number[][];
   }[];
 }
 
