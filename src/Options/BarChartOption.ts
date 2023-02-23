@@ -18,10 +18,25 @@ export const initialBartChartOption: barChartInterface = {
     name: "",
     type: "category",
     data: [],
+    nameLocation: "end",
+    nameTextStyle: {
+      color: "green",
+      fontSize: 8,
+      fontWeight: "bold",
+      align: "left",
+      overflow: "break",
+    },
   },
   yAxis: {
     name: "",
     type: "value",
+    nameTextStyle: {
+      color: "red",
+      fontSize: 12,
+      fontWeight: "bold",
+      align: "left",
+      overflow: "break",
+    },
   },
   series: [
     {

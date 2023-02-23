@@ -16,10 +16,26 @@ export interface scatterChartInterface {
   xAxis: {
     name: string;
     type: string;
+    nameLocation: string;
+    nameTextStyle: {
+      color: string;
+      fontSize: number;
+      fontWeight: string;
+      align: string;
+      overflow: string;
+    };
   };
   yAxis: {
     name: string;
     type: string;
+    nameLocation: string;
+    nameTextStyle: {
+      color: string;
+      fontSize: number;
+      fontWeight: string;
+      align: string;
+      overflow: string;
+    };
   };
   series: {
     type: string;
@@ -46,10 +62,25 @@ export interface barChartInterface {
     name: string;
     type: string;
     data: number[];
+    nameLocation: string;
+    nameTextStyle: {
+      color: string;
+      fontSize: number;
+      fontWeight: string;
+      align: string;
+      overflow: string;
+    };
   };
   yAxis: {
     name: string;
     type: string;
+    nameTextStyle: {
+      color: string;
+      fontSize: number;
+      fontWeight: string;
+      align: string;
+      overflow: string;
+    };
   };
   series: [
     {

@@ -3,10 +3,18 @@ import ReactEcharts from "echarts-for-react";
 import WineData from "../config/Wine-Data.json";
 import { barChartInterface } from "../interface/DataInterface";
 import { initialBartChartOption } from "../Options/BarChartOption";
+import "../css/chart.css";
+import * as echarts from "echarts";
 
+echarts.registerTheme("Night", {
+  backgroundColor: "black",
+});
+echarts.registerTheme("Day", {
+  backgroundColor: "#eee",
+});
 const BarChart: React.FC = () => {
   const [data, setData] = useState<barChartInterface>(initialBartChartOption);
-
+  const [theme, setTheme] = useState<string>();
   useEffect(() => {
     const malicAcid: number[] = [];
     const alcohol: number[] = [];
@@ -34,10 +42,25 @@ const BarChart: React.FC = () => {
         name: "Alcohal",
         type: "category",
         data: alcohol,
+        nameLocation: "end",
+        nameTextStyle: {
+          color: "red",
+          fontSize: 12,
+          fontWeight: "bold",
+          align: "left",
+          overflow: "break",
+        },
       },
       yAxis: {
         name: "Average Malic Acid",
         type: "value",
+        nameTextStyle: {
+          color: "red",
+          fontSize: 12,
+          fontWeight: "bold",
+          align: "left",
+          overflow: "break",
+        },
       },
       series: [
         {
@@ -54,21 +77,16 @@ const BarChart: React.FC = () => {
     });
   }, []);
 
+  const handleTheme: () => void = () => {
+    setTheme(theme === "Night" ? "Day" : "Night");
+  };
+
   return (
-    <div
-      style={{
-        width: "90%",
-        height: "50%",
-        padding: "10px",
-      }}
-    >
-      <ReactEcharts
-        style={{
-          width: "100%",
-          height: "400px",
-        }}
-        option={data}
-      />
+    <div className="EchartMainContainer">
+      <div className="scatterBtnDiv">
+        <button onClick={handleTheme}>Toggle Theme</button>
+      </div>
+      <ReactEcharts className="reactEchart" option={data} theme={theme} />
     </div>
   );
 };

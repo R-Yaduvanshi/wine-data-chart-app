@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import ReactEcharts from "echarts-for-react";
 import WineData from "../config/Wine-Data.json";
 import { scatterChartInterface } from "../interface/DataInterface";
-import * as echarts from "echarts";
 import { initialScatterOption } from "../Options/scatterChartOption";
+import "../css/chart.css";
+
 const Scatter: React.FC = () => {
-  console.log(echarts.registerTheme);
   const [data, setData] = useState<scatterChartInterface>(initialScatterOption);
+  const [theme, setTheme] = useState<string>();
 
   //   Data received from Wine-Data.json
   useEffect(() => {
@@ -33,10 +34,26 @@ const Scatter: React.FC = () => {
       xAxis: {
         name: "Color Intensity",
         type: "value",
+        nameLocation: "end",
+        nameTextStyle: {
+          color: "red",
+          fontSize: 12,
+          fontWeight: "bold",
+          align: "left",
+          overflow: "break",
+        },
       },
       yAxis: {
         name: "Hue",
         type: "value",
+        nameLocation: "end",
+        nameTextStyle: {
+          color: "red",
+          fontSize: 12,
+          fontWeight: "bold",
+          align: "left",
+          overflow: "break",
+        },
       },
       series: [
         {
@@ -46,21 +63,17 @@ const Scatter: React.FC = () => {
       ],
     });
   }, []);
+  const handleTheme: () => void = () => {
+    setTheme(theme === "Night" ? "Day" : "Night");
+  };
   return (
     <>
-      <div
-        style={{
-          width: "90%",
-          height: "100%",
-        }}
-      >
-        <ReactEcharts
-          style={{
-            width: "100%",
-            height: "400px",
-          }}
-          option={data}
-        />
+      <div className="EchartMainContainer">
+        <div className="scatterBtnDiv">
+          <button onClick={handleTheme}>Toggle Theme</button>
+        </div>
+
+        <ReactEcharts className="reactEchart" option={data} theme={theme} />
       </div>
     </>
   );

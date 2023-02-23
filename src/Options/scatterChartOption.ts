@@ -18,10 +18,27 @@ export const initialScatterOption: scatterChartInterface = {
   xAxis: {
     name: "Color Intensity",
     type: "value",
+    nameLocation: "end",
+    nameTextStyle: {
+      color: "red",
+      fontSize: 12,
+      fontWeight: "bold",
+      align: "left",
+      overflow: "break",
+    },
   },
   yAxis: {
     name: "Hue",
     type: "value",
+    nameLocation: "end",
+
+    nameTextStyle: {
+      color: "red",
+      fontSize: 12,
+      fontWeight: "bold",
+      align: "left",
+      overflow: "break",
+    },
   },
   series: [
     {
