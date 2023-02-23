@@ -23,7 +23,7 @@ canvas {
 
 /* Media Query */
 
-@media screen and (max-width: 900px) and (min-width: 600px) {
+/* @media screen and (max-width: 900px) and (min-width: 600px) {
   .EchartMainContainer {
     width: 50%;
   }
@@ -47,4 +47,4 @@ canvas {
   .reactEchart {
     width: fit-content;
   }
-}
+} */
