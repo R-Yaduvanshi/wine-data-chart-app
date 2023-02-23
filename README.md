@@ -1,3 +1,28 @@
+# Manufac Analytics
+
+I build a Data Visualization Task application with the help of Apache ECharts.
+
+(https://manufac-analytics-images.s3.ap-south-1.amazonaws.com/logos/landscape/black/Manufac_Final-2.png)
+
+<br/>
+
+<h3><i>Tech Stacks used </i></h3>
+
+<ul>
+<li>HTML</li>
+<li>CSS</li>
+<li>Typescripr</li>
+<li>React</li>
+</ul>
+
+<h3><i>External libraries used </i></h3>
+
+<ul>
+<li>Apache ECharts</li>
+</ul>
+
+<br/>
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
