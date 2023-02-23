@@ -1,35 +1,11 @@
 import React, { useState, useEffect } from "react";
 import ReactEcharts from "echarts-for-react";
 import WineData from "../config/Wine-Data.json";
-import { BarData } from "../interface/DataInterface";
+import { barChartInterface } from "../interface/DataInterface";
+import { initialBartChartOption } from "../Options/BarChartOption";
 
 const BarChart: React.FC = () => {
-  const [data, setData] = useState<BarData>({
-    title: {
-      text: "Bar Chart",
-    },
-    tooltip: {},
-    xAxis: {
-      name: "",
-      type: "category",
-      data: [],
-    },
-    yAxis: {
-      name: "",
-      type: "value",
-    },
-    series: [
-      {
-        name: "Color Intencity",
-        data: [],
-        type: "bar",
-        showBackground: true,
-        backgroundStyle: {
-          color: "rgba(220, 220, 220, 0.8)",
-        },
-      },
-    ],
-  });
+  const [data, setData] = useState<barChartInterface>(initialBartChartOption);
 
   useEffect(() => {
     const malicAcid: number[] = [];
@@ -42,6 +18,16 @@ const BarChart: React.FC = () => {
     setData({
       title: {
         text: "Bar Chart",
+        left: "center",
+        textStyle: {
+          fontSize: 30,
+          color: "red",
+        },
+      },
+      toolbox: {
+        feature: {
+          saveAsImage: {},
+        },
       },
       tooltip: {},
       xAxis: {
@@ -55,7 +41,6 @@ const BarChart: React.FC = () => {
       },
       series: [
         {
-          name: "Average Malic Acid",
           data: malicAcid,
 
           type: "bar",
@@ -63,12 +48,29 @@ const BarChart: React.FC = () => {
           backgroundStyle: {
             color: "rgba(220, 220, 220, 0.8)",
           },
+          colorBy: "data",
         },
       ],
     });
   }, []);
 
-  return <ReactEcharts option={data} />;
+  return (
+    <div
+      style={{
+        width: "90%",
+        height: "50%",
+        padding: "10px",
+      }}
+    >
+      <ReactEcharts
+        style={{
+          width: "100%",
+          height: "400px",
+        }}
+        option={data}
+      />
+    </div>
+  );
 };
 
 export default BarChart;

@@ -1,12 +1,21 @@
-export interface ChartData {
+export interface scatterChartInterface {
   title: {
     text: string;
+    left: string;
+    textStyle: {
+      fontSize: number;
+      color: string;
+    };
+  };
+  toolbox: {
+    feature: {
+      saveAsImage: {};
+    };
   };
   tooltip: {};
   xAxis: {
     name: string;
     type: string;
-    // data?: number[];
   };
   yAxis: {
     name: string;
@@ -18,9 +27,19 @@ export interface ChartData {
   }[];
 }
 
-export interface BarData {
+export interface barChartInterface {
   title: {
     text: string;
+    left: string;
+    textStyle: {
+      fontSize: number;
+      color: string;
+    };
+  };
+  toolbox: {
+    feature: {
+      saveAsImage: {};
+    };
   };
   tooltip: {};
   xAxis: {
@@ -34,13 +53,13 @@ export interface BarData {
   };
   series: [
     {
-      name: string;
       data: number[];
       type: string;
       showBackground: boolean;
       backgroundStyle: {
         color: "rgba(220, 220, 220, 0.8)";
       };
+      colorBy: string;
     }
   ];
 }

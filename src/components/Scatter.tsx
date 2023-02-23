@@ -1,30 +1,12 @@
 import React, { useState, useEffect } from "react";
 import ReactEcharts from "echarts-for-react";
 import WineData from "../config/Wine-Data.json";
-import { ChartData } from "../interface/DataInterface";
-// import styles from "../css/scatterstyle.module.css";
-
+import { scatterChartInterface } from "../interface/DataInterface";
+import * as echarts from "echarts";
+import { initialScatterOption } from "../Options/scatterChartOption";
 const Scatter: React.FC = () => {
-  const [data, setData] = useState<ChartData>({
-    title: {
-      text: "ECharts Getting Started Example",
-    },
-    tooltip: {},
-    xAxis: {
-      name: "Color Intensity",
-      type: "value",
-    },
-    yAxis: {
-      name: "Hue",
-      type: "value",
-    },
-    series: [
-      {
-        type: "scatter",
-        data: [],
-      },
-    ],
-  });
+  console.log(echarts.registerTheme);
+  const [data, setData] = useState<scatterChartInterface>(initialScatterOption);
 
   //   Data received from Wine-Data.json
   useEffect(() => {
@@ -36,6 +18,16 @@ const Scatter: React.FC = () => {
     setData({
       title: {
         text: "Scatter Plot chart",
+        left: "center",
+        textStyle: {
+          fontSize: 30,
+          color: "red",
+        },
+      },
+      toolbox: {
+        feature: {
+          saveAsImage: {},
+        },
       },
       tooltip: {},
       xAxis: {
@@ -54,11 +46,21 @@ const Scatter: React.FC = () => {
       ],
     });
   }, []);
-
   return (
     <>
-      <div>
-        <ReactEcharts option={data} />
+      <div
+        style={{
+          width: "90%",
+          height: "100%",
+        }}
+      >
+        <ReactEcharts
+          style={{
+            width: "100%",
+            height: "400px",
+          }}
+          option={data}
+        />
       </div>
     </>
   );
