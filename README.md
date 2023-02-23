@@ -1,9 +1,9 @@
 # Manufac Analytics
 
+<img src="https://manufac-analytics-images.s3.ap-south-1.amazonaws.com/logos/landscape/black/Manufac_Final-2.png" width="100%"/>
+
+<br/>
 I build a Data Visualization Task application with the help of Apache ECharts.
-
-(https://manufac-analytics-images.s3.ap-south-1.amazonaws.com/logos/landscape/black/Manufac_Final-2.png)
-
 <br/>
 
 <h3><i>Tech Stacks used </i></h3>
