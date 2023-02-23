@@ -1,10 +1,10 @@
-# Manufac Analytics
+# Manufac Analytics <h2><i><a href="https://wine-data-chart-app.vercel.app/">LIVE SITE</a></i></h2>
 
 <img src="https://manufac-analytics-images.s3.ap-south-1.amazonaws.com/logos/landscape/black/Manufac_Final-2.png" width="100%"/>
 
 <br/>
 I build a Data Visualization Task application with the help of Apache ECharts.
-<br/>
+
 
 <h3><i>Tech Stacks used </i></h3>
 
@@ -23,11 +23,17 @@ I build a Data Visualization Task application with the help of Apache ECharts.
 
 <br/>
 
+<h1>Bar Chart</h1>
+<img src="https://user-images.githubusercontent.com/100795038/221027627-72ee5a8a-96bb-45d6-b25a-80a4e556dc95.png"/>
+<br/>
+<h1>Scatter Chart</h1>
+<img src="https://user-images.githubusercontent.com/100795038/221028375-db5b548a-7c81-485c-87fa-aff822b65b96.png"/>
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
+
 
 In the project directory, you can run:
 
