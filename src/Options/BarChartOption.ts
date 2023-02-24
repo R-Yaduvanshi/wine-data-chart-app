@@ -13,12 +13,20 @@ export const initialBartChartOption: barChartInterface = {
       saveAsImage: {},
     },
   },
-  tooltip: {},
+  tooltip: {
+    trigger: "axis",
+    axisPointer: {
+      type: "shadow",
+    },
+  },
   xAxis: {
     name: "",
     type: "category",
     data: [],
     nameLocation: "end",
+    axisLabel: {
+      formatter: "Class {value}",
+    },
     nameTextStyle: {
       color: "green",
       fontSize: 8,
@@ -42,11 +50,11 @@ export const initialBartChartOption: barChartInterface = {
     {
       data: [],
       type: "bar",
-      showBackground: true,
-      backgroundStyle: {
-        color: "rgba(220, 220, 220, 0.8)",
+      label: {
+        show: true,
+        position: "top",
       },
-      colorBy: "data",
+      showBackground: true,
     },
   ],
 };

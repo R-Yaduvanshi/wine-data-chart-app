@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import ReactEcharts from "echarts-for-react";
 import WineData from "../config/Wine-Data.json";
-import { barChartInterface } from "../interface/DataInterface";
+import {
+  AverageMalicAcid,
+  barChartInterface,
+} from "../interface/DataInterface";
 import { initialBartChartOption } from "../Options/BarChartOption";
 import "../css/chart.css";
 import * as echarts from "echarts";
-
+// import WineData from "../config/Wine-Data.json";
 echarts.registerTheme("Night", {
   backgroundColor: "black",
 });
@@ -15,13 +18,39 @@ echarts.registerTheme("Day", {
 const BarChart: React.FC = () => {
   const [data, setData] = useState<barChartInterface>(initialBartChartOption);
   const [theme, setTheme] = useState<string>();
+  const [averageMalicAcids, setAverageMalicAcids] = useState<
+    AverageMalicAcid[]
+  >([]);
+
+  const malicAcidsByClass: { [key: number]: number[] } = {};
+  const XaxisClassData: number[] = [];
+  const seriesData: number[] = [];
+
+  averageMalicAcids.map((elem) => {
+    XaxisClassData.push(elem.class);
+    seriesData.push(elem.average);
+  });
+
   useEffect(() => {
-    const malicAcid: number[] = [];
-    const alcohol: number[] = [];
-    for (const Data of WineData) {
-      malicAcid.push(Data["Malic Acid"]);
-      alcohol.push(Data.Alcohol);
-    }
+    // here i'm storing each class with their Malik Acid
+    WineData.forEach((data) => {
+      if (!malicAcidsByClass[data.Alcohol]) {
+        malicAcidsByClass[data.Alcohol] = [];
+      }
+      malicAcidsByClass[data.Alcohol].push(data["Malic Acid"]);
+    });
+
+    // Calculation of average malic acid for each class
+    const averages = Object.entries(malicAcidsByClass).map(
+      ([classKey, malicAcids]) => {
+        const classNumber = parseInt(classKey);
+        const average =
+          malicAcids.reduce((a, b) => a + b, 0) / malicAcids.length;
+        return { class: classNumber, average };
+      }
+    );
+
+    setAverageMalicAcids(averages);
 
     setData({
       title: {
@@ -37,12 +66,20 @@ const BarChart: React.FC = () => {
           saveAsImage: {},
         },
       },
-      tooltip: {},
+      tooltip: {
+        trigger: "axis",
+        axisPointer: {
+          type: "shadow",
+        },
+      },
       xAxis: {
         name: "Alcohal",
         type: "category",
-        data: alcohol,
+        data: XaxisClassData,
         nameLocation: "end",
+        axisLabel: {
+          formatter: "Class {value}",
+        },
         nameTextStyle: {
           color: "red",
           fontSize: 12,
@@ -64,14 +101,13 @@ const BarChart: React.FC = () => {
       },
       series: [
         {
-          data: malicAcid,
-
+          data: seriesData,
           type: "bar",
-          showBackground: true,
-          backgroundStyle: {
-            color: "rgba(220, 220, 220, 0.8)",
+          label: {
+            show: true,
+            position: "top",
           },
-          colorBy: "data",
+          showBackground: true,
         },
       ],
     });

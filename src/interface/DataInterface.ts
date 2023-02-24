@@ -57,12 +57,20 @@ export interface barChartInterface {
       saveAsImage: {};
     };
   };
-  tooltip: {};
+  tooltip: {
+    trigger: string;
+    axisPointer: {
+      type: string;
+    };
+  };
   xAxis: {
     name: string;
     type: string;
     data: number[];
     nameLocation: string;
+    axisLabel: {
+      formatter: string;
+    };
     nameTextStyle: {
       color: string;
       fontSize: number;
@@ -84,13 +92,18 @@ export interface barChartInterface {
   };
   series: [
     {
-      data: number[];
       type: string;
-      showBackground: boolean;
-      backgroundStyle: {
-        color: "rgba(220, 220, 220, 0.8)";
+      label: {
+        show: boolean;
+        position: string;
       };
-      colorBy: string;
+      data: number[];
+      showBackground: boolean;
     }
   ];
+}
+
+export interface AverageMalicAcid {
+  class: number;
+  average: number;
 }

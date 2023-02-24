@@ -63,6 +63,8 @@ const Scatter: React.FC = () => {
       ],
     });
   }, []);
+
+  // Theme function for Bar Chart
   const handleTheme: () => void = () => {
     setTheme(theme === "Night" ? "Day" : "Night");
   };
