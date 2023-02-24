@@ -1,38 +1,21 @@
 import React, { useState, useEffect } from "react";
 import ReactEcharts from "echarts-for-react";
 import WineData from "../config/Wine-Data.json";
-import {
-  AverageMalicAcid,
-  barChartInterface,
-} from "../interface/DataInterface";
-import { initialBartChartOption } from "../Options/BarChartOption";
 import "../css/chart.css";
-import * as echarts from "echarts";
-// import WineData from "../config/Wine-Data.json";
-echarts.registerTheme("Night", {
-  backgroundColor: "black",
-});
-echarts.registerTheme("Day", {
-  backgroundColor: "#eee",
-});
+import { barChartInterface } from "../interface/DataInterface";
+
 const BarChart: React.FC = () => {
-  const [data, setData] = useState<barChartInterface>(initialBartChartOption);
+  // it contain theme value
   const [theme, setTheme] = useState<string>();
-  const [averageMalicAcids, setAverageMalicAcids] = useState<
-    AverageMalicAcid[]
-  >([]);
+  // it contain alcohal class
+  const [xAxisData, setXaxisData] = useState<string[]>([]);
+  // it contain average of malicAcid
+  const [seriesDataa, setSeriesData] = useState<number[]>([]);
 
-  const malicAcidsByClass: { [key: number]: number[] } = {};
-  const XaxisClassData: number[] = [];
-  const seriesData: number[] = [];
-
-  averageMalicAcids.map((elem) => {
-    XaxisClassData.push(elem.class);
-    seriesData.push(elem.average);
-  });
-
-  useEffect(() => {
-    // here i'm storing each class with their Malik Acid
+  // getData function a object and in this object, i'm setting the key as class of Alcohal,
+  // and assign each key is a array of malick acid data
+  const getData = () => {
+    let malicAcidsByClass: { [key: number]: number[] } = {};
     WineData.forEach((data) => {
       if (!malicAcidsByClass[data.Alcohol]) {
         malicAcidsByClass[data.Alcohol] = [];
@@ -40,81 +23,99 @@ const BarChart: React.FC = () => {
       malicAcidsByClass[data.Alcohol].push(data["Malic Acid"]);
     });
 
-    // Calculation of average malic acid for each class
-    const averages = Object.entries(malicAcidsByClass).map(
+    // Here i'm calling the calculateAverage which takes malicAcidsByClass as parameter
+    calculateAverage(malicAcidsByClass);
+  };
+
+  // here i'm defining the calculateAverage function
+  // in this function i'm set the both state [setXaxisData] and setSeriesData
+  const calculateAverage = (malicAcidData: any) => {
+    setXaxisData(Object.keys(malicAcidData));
+    const avg: number[] = [];
+    const averages = Object.entries(malicAcidData).map(
       ([classKey, malicAcids]) => {
         const classNumber = parseInt(classKey);
         const average =
-          malicAcids.reduce((a, b) => a + b, 0) / malicAcids.length;
+          (malicAcids as number[]).reduce((a: number, b: number) => a + b, 0) /
+          (malicAcids as number[]).length;
         return { class: classNumber, average };
       }
     );
 
-    setAverageMalicAcids(averages);
-
-    setData({
-      title: {
-        text: "Bar Chart",
-        left: "center",
-        textStyle: {
-          fontSize: 30,
-          color: "red",
-        },
-      },
-      toolbox: {
-        feature: {
-          saveAsImage: {},
-        },
-      },
-      tooltip: {
-        trigger: "axis",
-        axisPointer: {
-          type: "shadow",
-        },
-      },
-      xAxis: {
-        name: "Alcohal",
-        type: "category",
-        data: XaxisClassData,
-        nameLocation: "end",
-        axisLabel: {
-          formatter: "Class {value}",
-        },
-        nameTextStyle: {
-          color: "red",
-          fontSize: 12,
-          fontWeight: "bold",
-          align: "left",
-          overflow: "break",
-        },
-      },
-      yAxis: {
-        name: "Average Malic Acid",
-        type: "value",
-        nameTextStyle: {
-          color: "red",
-          fontSize: 12,
-          fontWeight: "bold",
-          align: "left",
-          overflow: "break",
-        },
-      },
-      series: [
-        {
-          data: seriesData,
-          type: "bar",
-          label: {
-            show: true,
-            position: "top",
-          },
-          showBackground: true,
-        },
-      ],
+    averages.forEach((elem) => {
+      avg.push(elem.average);
     });
+    setSeriesData(avg);
+  };
+
+  useEffect(() => {
+    getData();
   }, []);
 
+  // Theme function
   const handleTheme: () => void = () => {
     setTheme(theme === "Night" ? "Day" : "Night");
+  };
+
+  // optionData
+  const optionData: barChartInterface = {
+    title: {
+      text: "Bar Chart",
+      left: "center",
+      textStyle: {
+        fontSize: 30,
+        color: "red",
+      },
+    },
+    toolbox: {
+      feature: {
+        saveAsImage: {},
+      },
+    },
+    tooltip: {
+      trigger: "axis",
+      axisPointer: {
+        type: "shadow",
+      },
+    },
+    xAxis: {
+      name: "Alcohal",
+      type: "category",
+      data: xAxisData,
+      nameLocation: "end",
+      axisLabel: {
+        formatter: "Class {value}",
+      },
+      nameTextStyle: {
+        color: "red",
+        fontSize: 12,
+        fontWeight: "bold",
+        align: "left",
+        overflow: "break",
+      },
+    },
+    yAxis: {
+      name: "Average Malic Acid",
+      type: "value",
+      nameTextStyle: {
+        color: "red",
+        fontSize: 12,
+        fontWeight: "bold",
+        align: "left",
+        overflow: "break",
+      },
+    },
+    series: [
+      {
+        data: seriesDataa,
+        type: "bar",
+        label: {
+          show: true,
+          position: "top",
+        },
+        showBackground: true,
+      },
+    ],
   };
 
   return (
@@ -122,7 +123,7 @@ const BarChart: React.FC = () => {
       <div className="scatterBtnDiv">
         <button onClick={handleTheme}>Toggle Theme</button>
       </div>
-      <ReactEcharts className="reactEchart" option={data} theme={theme} />
+      <ReactEcharts className="reactEchart" option={optionData} theme={theme} />
     </div>
   );
 };

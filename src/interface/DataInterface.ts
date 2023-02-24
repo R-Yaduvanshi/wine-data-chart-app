@@ -66,7 +66,7 @@ export interface barChartInterface {
   xAxis: {
     name: string;
     type: string;
-    data: number[];
+    data: string[];
     nameLocation: string;
     axisLabel: {
       formatter: string;
@@ -101,9 +101,4 @@ export interface barChartInterface {
       showBackground: boolean;
     }
   ];
-}
-
-export interface AverageMalicAcid {
-  class: number;
-  average: number;
 }
