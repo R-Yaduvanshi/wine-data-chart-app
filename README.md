@@ -23,10 +23,11 @@ I build a Data Visualization Task application with the help of Apache ECharts.
 
 <br/>
 
-<h1>Bar Chart</h1>
-<img src="https://user-images.githubusercontent.com/100795038/221027627-72ee5a8a-96bb-45d6-b25a-80a4e556dc95.png"/>
+<h1>Bar Chart </h1>
+<img src="https://user-images.githubusercontent.com/100795038/221243940-cef89659-73c0-4396-bafd-0878c814ec24.png"/>
 <br/>
 <h1>Scatter Chart</h1>
+<br/>
 <img src="https://user-images.githubusercontent.com/100795038/221028375-db5b548a-7c81-485c-87fa-aff822b65b96.png"/>
 # Getting Started with Create React App
 
